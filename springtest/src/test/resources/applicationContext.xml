@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+	
+	<context:component-scan base-package="com.yedam.app"></context:component-scan>
+<!-- 위에 방식이 자동으로 스캔해서 시작하는거임 @component 해둬야함>	
+	이건 옛날방식<bean name="tv" class="com.yedam.app.ioc.LgTV"/>  -->
+</beans>
