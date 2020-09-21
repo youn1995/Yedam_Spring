@@ -30,8 +30,8 @@ public class MemberDAO implements DAO {
 
 	@Override
 	public MemberVo selectOne(MemberVo memberVo) {
-		MemberVo resultVo = null;
 		ResultSet rs = null;
+		MemberVo resultVo = null;
 		try {
 			conn = ConnectionManager.getConnnect();
 			String sql = "SELECT ID, PW, JOB, GENDER, MAILYN, REASON, HOBBY" + " FROM MEMBER" + " WHERE ID = ?";
@@ -39,7 +39,7 @@ public class MemberDAO implements DAO {
 			pstmt.setString(1, memberVo.getId());
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				resultVo = new MemberVo();
+				resultVo = MemberVo.builder().build();
 				resultVo.setId(rs.getString(1));
 				resultVo.setPw(rs.getString(2));
 				resultVo.setJob(rs.getString(3));
@@ -129,7 +129,6 @@ public class MemberDAO implements DAO {
 	@Override
 	public ArrayList<MemberVo> selectAll() {
 		ArrayList<MemberVo> list = new ArrayList<MemberVo>();
-		MemberVo resultVo = null;
 		ResultSet rs = null;
 		try {
 			conn = ConnectionManager.getConnnect();
@@ -137,7 +136,7 @@ public class MemberDAO implements DAO {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				resultVo = new MemberVo();
+				MemberVo resultVo = MemberVo.builder().build();
 				resultVo.setId(rs.getString(1));
 				resultVo.setPw(rs.getString(2));
 				resultVo.setJob(rs.getString(3));

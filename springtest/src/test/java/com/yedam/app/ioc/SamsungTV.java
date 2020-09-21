@@ -1,12 +1,16 @@
 package com.yedam.app.ioc;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-@Component("tv")
+//@Component
 public class SamsungTV implements TV {
-
-	@Autowired //주입 factory.getBean("speaker")랑 같은 역활//의존관계 있는 놈중 등록한 놈을 주입함
+//	@Resource(name="sonySpeaker") // name 생략시 class이름이랑 같은거 autowired랑 qualifer 합친거
+//	@Autowired //주입 factory.getBean("speaker")랑 같은 역활//의존관계 있는 놈중 등록한 놈을 주입함
+//	@Qualifier("sonySpeaker") //같은 이름의 빈이 두개있으면 그중에 멀들고 올지 정하는거
 	private Speaker speaker;	
 	private int price;
 	

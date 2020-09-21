@@ -2,10 +2,37 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<bean id="logAdvice" class="com.yedam.app.aop.LogAdvice"></bean>
+	<bean id="afterAdvice" class="com.yedam.app.aop.AfterReturningAdvice"></bean>
+	<aop:config>
+		<aop:pointcut
+			expression="execution(* com.yedam.app..*.*(..))" id="allpointcut" /> <!-- app 뒤애..은 모든 패키지뜻  첫번째별이 클래스명 두번째 별이 메소드명 -->
+		<aop:pointcut
+			expression="execution(* com.yedam.app..*.select*(..))" id="selectpointcut" /> <!-- pointcut 여러개 가능 -->
+		<aop:aspect ref="logAdvice">
+			<aop:before method="printLog" pointcut-ref="allpointcut" />
+		</aop:aspect>
+		<aop:aspect ref="afterAdvice">
+			<aop:after-returning method="afterLog" pointcut-ref="selectpointcut" returning="returnObj"/> <!-- method의 두번째 인수값 -->
+		</aop:aspect>
+	</aop:config>
 	
-	<context:component-scan base-package="com.yedam.app"></context:component-scan>
-<!-- 위에 방식이 자동으로 스캔해서 시작하는거임 @component 해둬야함>	
-	이건 옛날방식<bean name="tv" class="com.yedam.app.ioc.LgTV"/>  -->
+	
+	 <context:component-scan
+		base-package="com.yedam.app"></context:component-scan>
+		
+	<!--  <bean name="sony" class="com.yedam.app.ioc.SonySpeaker"
+		scope="singleton"></bean> singleton은 디폴트 객체하나만 생성 prototype은 객체생성시 다른객체 -->
+
+	<!-- 위에 방식이 자동으로 스캔해서 시작하는거임 @component 해둬야함> 이건 옛날방식<bean name="tv" class="com.yedam.app.ioc.LgTV"/> -->
+	<!-- <bean name="sony" class="com.yedam.app.ioc.SonySpeaker"></bean> <bean 
+		name="apple" class="com.yedam.app.ioc.AppleSpeaker"></bean> <bean name ="tv" 
+		class="com.yedam.app.ioc.LgTV"> <property name="speaker" ref="apple"></property> 
+		</bean> -->
 </beans>

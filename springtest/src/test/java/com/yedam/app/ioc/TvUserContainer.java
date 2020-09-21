@@ -9,12 +9,14 @@ public class TvUserContainer {
 
 		AbstractApplicationContext  factory =
 				new GenericXmlApplicationContext("applicationContext.xml");
-		TV tv = (TV)factory.getBean("tv");
-		
-		tv.powerOn();
-		tv.volumeUp();
-		tv.volumeDown();
-		tv.powerOff();
-
+//		TV tv = (TV)factory.getBean("tv");
+//		
+//		tv.powerOn();
+//		tv.volumeUp();
+//		tv.volumeDown();
+//		tv.powerOff();
+		Speaker speaker1 = (Speaker) factory.getBean("sony");
+		Speaker speaker2 = (Speaker) factory.getBean("sony");
+		System.out.println(speaker1 == speaker2 ? "yes" : "no");
 	}
 }

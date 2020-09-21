@@ -2,7 +2,7 @@
 
 import org.springframework.stereotype.Component;
 
-@Component //빈등록
+//Component //빈등록 //으름안주면 클래스명의 첫글자 소문자로 해서생성
 public class AppleSpeaker implements Speaker  {
 
 	public AppleSpeaker() {

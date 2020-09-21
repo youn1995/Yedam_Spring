@@ -1,6 +1,7 @@
 package com.yedam.app.common;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,18 +15,18 @@ public class ConnectionManager {
 	public static Connection getConnnect() {
 		Connection conn = null;
 		try {
-			//driverManager 이용하여 연결
-//			Class.forName("oracle.jdbc.OracleDriver");
-//		String jdbc_url = "jdbc:oracle:thin:@localhost:1521:xe";
-//			conn = DriverManager.getConnection(jdbc_url, "hr", "hr");
+		//	driverManager 이용하여 연결
+			Class.forName("oracle.jdbc.OracleDriver");
+		String jdbc_url = "jdbc:oracle:thin:@localhost:1521:xe";
+			conn = DriverManager.getConnection(jdbc_url, "jsp", "jsp");
 
 			//datasource를 이용하여 connection 획득
 			
-			  Context initContext = new InitialContext(); DataSource ds =
-			  (DataSource)initContext.lookup("java:/comp/env/jdbc/oracle"); conn =
-			  ds.getConnection(); //conn 을 할당받음
-			 		System.out.println("dbcp에서 conn 할당");
-			 		
+//			  Context initContext = new InitialContext(); DataSource ds =
+//			  (DataSource)initContext.lookup("java:/comp/env/jdbc/oracle"); conn =
+//			  ds.getConnection(); //conn 을 할당받음
+//			 		System.out.println("dbcp에서 conn 할당");
+//			 		
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
