@@ -1,4 +1,4 @@
-package com.yedam.app.member;
+package com.yedam.app.member.mapper;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,9 +11,10 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.yedam.app.common.ConnectionManager;
+import com.yedam.app.member.MemberVo;
 
-@Component //스프링컨테이너가 관리하도록 빈등록//singletone으로 관리
-public class MemberDAO implements DAO {
+//@Component //스프링컨테이너가 관리하도록 빈등록//singletone으로 관리
+public class MemberJavaDAO implements MemberDAO {
 	Connection conn;
 	PreparedStatement pstmt;
 

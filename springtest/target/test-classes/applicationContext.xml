@@ -8,21 +8,21 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 
-	<bean id="logAdvice" class="com.yedam.app.aop.LogAdvice"></bean>
+<!-- 	<bean id="logAdvice" class="com.yedam.app.aop.LogAdvice"></bean>
 	<bean id="afterAdvice" class="com.yedam.app.aop.AfterReturningAdvice"></bean>
 	<aop:config>
 		<aop:pointcut
-			expression="execution(* com.yedam.app..*.*(..))" id="allpointcut" /> <!-- app 뒤애..은 모든 패키지뜻  첫번째별이 클래스명 두번째 별이 메소드명 -->
+			expression="execution(* com.yedam.app..*.*(..))" id="allpointcut" /> app 뒤애..은 모든 패키지뜻  첫번째별이 클래스명 두번째 별이 메소드명
 		<aop:pointcut
-			expression="execution(* com.yedam.app..*.select*(..))" id="selectpointcut" /> <!-- pointcut 여러개 가능 -->
+			expression="execution(* com.yedam.app..*.select*(..))" id="selectpointcut" /> pointcut 여러개 가능
 		<aop:aspect ref="logAdvice">
 			<aop:before method="printLog" pointcut-ref="allpointcut" />
 		</aop:aspect>
 		<aop:aspect ref="afterAdvice">
-			<aop:after-returning method="afterLog" pointcut-ref="selectpointcut" returning="returnObj"/> <!-- method의 두번째 인수값 -->
+			<aop:after-returning method="afterLog" pointcut-ref="selectpointcut" returning="returnObj"/> method의 두번째 인수값
 		</aop:aspect>
 	</aop:config>
-	
+	 -->
 	
 	 <context:component-scan
 		base-package="com.yedam.app"></context:component-scan>

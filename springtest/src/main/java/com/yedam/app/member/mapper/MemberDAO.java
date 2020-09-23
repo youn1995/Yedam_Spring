@@ -1,10 +1,12 @@
-package com.yedam.app.member;
+package com.yedam.app.member.mapper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public interface DAO {
+import com.yedam.app.member.MemberVo;
+
+public interface MemberDAO {
 
 	MemberVo selectOne(MemberVo memberVo);
 
