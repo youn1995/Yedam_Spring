@@ -16,6 +16,6 @@ public interface MemberService {
 
 	int insert(MemberVo memberVo);
 
-	ArrayList<MemberVo> selectAll();
+	List<MemberVo> selectAll();
 
 }

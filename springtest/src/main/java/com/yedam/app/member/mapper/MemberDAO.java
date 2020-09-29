@@ -1,7 +1,5 @@
 package com.yedam.app.member.mapper;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import com.yedam.app.member.MemberVo;
@@ -16,12 +14,5 @@ public interface MemberDAO {
 
 	int insert(MemberVo memberVo);
 
-	ArrayList<MemberVo> selectAll();
-
-	// 메일 수신회원수
-	int getMailYnCnt();
-
-	// 성별 인원 수
-	List<HashMap<String, Object>> getGenderCnt();
-
+	List<MemberVo> selectAll();
 }

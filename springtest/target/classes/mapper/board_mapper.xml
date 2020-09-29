@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yedam.app.board.mapper.BoardDAO">
+	<resultMap type="board" id="boardmap">
+		<id property="board_no" column="no"/> <!--  id = pk컬럼 -->
+		<result property="poster" column="poster"/>
+		<result property="subject" column="subject"/>
+		<result property="board_contents" column="contents"/>
+		<result property="lastpost" column="lastpost"/>
+		<result property="views" column="views"/>
+		<result property="filename" column="filename"/>
+		<association property="member">
+			<result property="" column=""/> <!-- 이렇게하면 join한거 들고 올수있음 vo에 -->
+		</association>
+	</resultMap>
+	
+	<select id="selectAll" resultType="board" parameterType="board">
+		select A.* from (select rownum RN, B.* from (
+		SELECT 
+		no board_no,
+		poster ,
+		subject,
+		contents board_contents,
+		lastpost,
+		views,
+		filename
+		FROM BOARD 
+		<where>
+		<if test="poster != null and poster !=''">
+		 POSTER LIKE '%' || #{poster} || '%'
+		</if>
+		<if test="subject != null and subject !=''">
+		and SUBJECT LIKE '%' || #{subject} || '%'
+		</if>
+		<if test="boardContents != null and boardContents !=''">
+		and contents LIKE '%' || #{boardContents} || '%'
+		</if>
+		</where>	
+		ORDER BY no <!-- ${sortCol} --> <!-- $는 값 그대로 들어감 근데 #하면 문자열이면 ''들어가고 숫자면 ''없이 숫자로 -->
+		) B ) A where RN Between #{first} and #{last} 
+	</select>
+	<!-- where 절 조건이 일치해야함 -->
+	<select id="selectCnt" resultType="int">
+		SELECT COUNT(*) FROM BOARD
+		<where>
+		<if test="poster != null and poster !=''">
+		 POSTER LIKE '%' || #{poster} || '%'
+		</if>
+		<if test="subject != null and subject !=''">
+		and SUBJECT LIKE '%' || #{subject} || '%'
+		</if>
+		<if test="boardContents != null and boardContents !=''">
+		and contents LIKE '%' || #{boardContents} || '%'
+		</if>
+		</where>
+	</select>
+	
+	<select id="selectMap" resultType="map">
+		SELECT 
+		no as "no",
+		poster as "poster",
+		subject as "subject",
+		contents as "contents",
+		lastpost,
+		views,
+		filename,
+		name,
+		gender,
+		role
+		FROM BOARD, users
+		WHERE BOARD.POSTER =users.ID
+		ORDER BY no 
+	</select>
+	
+	<insert id="insert" parameterType="board">
+		<selectKey keyProperty="no" resultType="integer"
+			order="BEFORE">
+			SELECT NVL(Max(NO),0)+1 FROM Board
+		</selectKey>
+		INSERT INTO BOARD (no, poster, subject, contents, LASTPOST,VIEWS
+		<if test="filename != null and filename !=''">
+		 	,FILENAME
+		</if>
+		
+		)
+		VALUES (#{no}, #{poster}, #{subject}, #{contents}, SYSDATE, 0
+		<if test="filename != null and filename !=''">
+		 	,#{filename}
+		</if>
+		
+		)
+	</insert>
+	<update id="updateSeq">
+		UPDATE SEQ SET NO = NO + 1 WHERE TABLENAME = 'board'
+	</update>
+	
+	<delete id="delete" parameterType="board">
+		DELETE FROM BOARD
+		WHERE NO IN
+			<foreach collection="nos" item="i" open="(" close=")" separator=",">
+				#{i}
+			</foreach>
+	</delete>
+
+	<!-- <select id="selectSeq" resultType="int"> SELECT NO FROM SEQ WHERE TABLENAME 
+		='board' </select> -->
+</mapper>

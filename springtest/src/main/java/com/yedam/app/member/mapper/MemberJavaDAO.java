@@ -40,14 +40,14 @@ public class MemberJavaDAO implements MemberDAO {
 			pstmt.setString(1, memberVo.getId());
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				resultVo = MemberVo.builder().build();
-				resultVo.setId(rs.getString(1));
-				resultVo.setPw(rs.getString(2));
-				resultVo.setJob(rs.getString(3));
-				resultVo.setGender(rs.getString(4));
-				resultVo.setMailyn(rs.getString(5));
-				resultVo.setReason(rs.getString(6));
-				resultVo.setHobby(rs.getString(7));
+//				resultVo = MemberVo.builder().build();
+//				resultVo.setId(rs.getString(1));
+//				resultVo.setPw(rs.getString(2));
+//				resultVo.setJob(rs.getString(3));
+//				resultVo.setGender(rs.getString(4));
+//				resultVo.setMailyn(rs.getString(5));
+//				resultVo.setReason(rs.getString(6));
+//				resultVo.setHobby(rs.getString(7));
 			} else {
 				System.out.println("No data");
 			}
@@ -137,16 +137,16 @@ public class MemberJavaDAO implements MemberDAO {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				MemberVo resultVo = MemberVo.builder().build();
-				resultVo.setId(rs.getString(1));
-				resultVo.setPw(rs.getString(2));
-				resultVo.setJob(rs.getString(3));
-				resultVo.setGender(rs.getString(4));
-				resultVo.setMailyn(rs.getString(5));
-				resultVo.setReason(rs.getString(6));
-				resultVo.setHobby(rs.getString(7));
-				resultVo.setRegdate(rs.getString(8));
-				list.add(resultVo);
+				//MemberVo resultVo = MemberVo.builder().build();
+//				resultVo.setId(rs.getString(1));
+//				resultVo.setPw(rs.getString(2));
+//				resultVo.setJob(rs.getString(3));
+//				resultVo.setGender(rs.getString(4));
+//				resultVo.setMailyn(rs.getString(5));
+//				resultVo.setReason(rs.getString(6));
+//				resultVo.setHobby(rs.getString(7));
+//				resultVo.setRegdate(rs.getString(8));
+//				list.add(resultVo);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -157,47 +157,47 @@ public class MemberJavaDAO implements MemberDAO {
 	}
 
 	// 메일 수신회원수
-	@Override
-	public int getMailYnCnt() {
-		int cnt = 0;
-		ResultSet rs = null;
-		try {
-			conn = ConnectionManager.getConnnect();
-			String sql = "SELECT COUNT(ID) CNT FROM MEMBER WHERE UPPER(MAILYN) = 'Y'";
-			Statement stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
-			rs.next();
-			cnt = rs.getInt(1);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			ConnectionManager.close(rs, pstmt, conn);
-		}
-		return cnt;
-	}
-
-	// 성별 인원 수
-	@Override
-	public List<HashMap<String, Object>> getGenderCnt() {
-		ResultSet rs = null;
-		List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
-		try {
-			conn = ConnectionManager.getConnnect();
-			String sql = "SELECT GENDER, COUNT(ID) CNT FROM MEMBER GROUP BY GENDER";
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				HashMap<String, Object> map = new HashMap<String, Object>();
-				map.put("gender", rs.getString("gender"));
-				map.put("cnt", rs.getString("cnt"));
-				list.add(map);
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			ConnectionManager.close(rs, pstmt, conn);
-		}
-		return list;
-	}
+//	@Override
+//	public int getMailYnCnt() {
+//		int cnt = 0;
+//		ResultSet rs = null;
+//		try {
+//			conn = ConnectionManager.getConnnect();
+//			String sql = "SELECT COUNT(ID) CNT FROM MEMBER WHERE UPPER(MAILYN) = 'Y'";
+//			Statement stmt = conn.createStatement();
+//			rs = stmt.executeQuery(sql);
+//			rs.next();
+//			cnt = rs.getInt(1);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			ConnectionManager.close(rs, pstmt, conn);
+//		}
+//		return cnt;
+//	}
+//
+//	// 성별 인원 수
+//	@Override
+//	public List<HashMap<String, Object>> getGenderCnt() {
+//		ResultSet rs = null;
+//		List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+//		try {
+//			conn = ConnectionManager.getConnnect();
+//			String sql = "SELECT GENDER, COUNT(ID) CNT FROM MEMBER GROUP BY GENDER";
+//			pstmt = conn.prepareStatement(sql);
+//			rs = pstmt.executeQuery();
+//			while (rs.next()) {
+//				HashMap<String, Object> map = new HashMap<String, Object>();
+//				map.put("gender", rs.getString("gender"));
+//				map.put("cnt", rs.getString("cnt"));
+//				list.add(map);
+//			}
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			ConnectionManager.close(rs, pstmt, conn);
+//		}
+//		return list;
+//	}
 }

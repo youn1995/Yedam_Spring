@@ -1,6 +1,7 @@
 package com.yedam.app.member.web;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -77,11 +78,16 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/memberListAjax")
-	@ResponseBody
-	public ArrayList<MemberVo> memberListAjax(Model model, HttpServletRequest request, HttpSession session) {
+	@ResponseBody // json String 변환
+	public List<MemberVo> memberListAjax(Model model, HttpServletRequest request, HttpSession session) {
 		//회원조회
 		return memberService.selectAll();
 	}
 	
+	@RequestMapping("/memberOneAjax")
+	@ResponseBody
+	public MemberVo memberOneAjax(MemberVo memberVo) {
+		return memberService.selectOne(memberVo);
+	}
 	
 }

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.yedam.app.member.MemberVo;
 
-@Component
+//@Component
 public class MemberSpringDAO implements MemberDAO {
 
 	@Autowired JdbcTemplate template;
@@ -54,17 +54,6 @@ public class MemberSpringDAO implements MemberDAO {
 		return (ArrayList<MemberVo>) template.query(SELECT_MEMBER_ALL, new MemberRowMapper());
 	}
 
-	@Override
-	public int getMailYnCnt() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<HashMap<String, Object>> getGenderCnt() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	class MemberRowMapper implements  RowMapper<MemberVo>{
 		@Override
