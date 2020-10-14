@@ -32,7 +32,7 @@ public class MemberController {
 		model.addAttribute("list", memberService.selectAll());
 		
 		//model.addAttribute("name", "홍길동");
-		return "/member/memberAll";
+		return "member/memberAll";
 	}
 	
 	//등록페이지
