@@ -22,6 +22,8 @@ public class MemberMybatisDAO implements MemberDAO {
 		System.out.println("mybatis selectAll run");
 		return sqlSession.selectList("memberDAO.selectAll");
 	}
+	
+	
 
 	@Override
 	public MemberVo selectOne(MemberVo memberVo) {

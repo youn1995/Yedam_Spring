@@ -1,21 +1,26 @@
 package com.yedam.app.member.web;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.yedam.app.member.MemberVo;
 import com.yedam.app.member.service.MemberService;
@@ -88,6 +93,34 @@ public class MemberController {
 	@ResponseBody
 	public MemberVo memberOneAjax(MemberVo memberVo) {
 		return memberService.selectOne(memberVo);
+	}
+	
+	//엑셀출력
+	@RequestMapping("/memberExcelView.do")
+	public ModelAndView excelView(MemberVo vo, HttpServletResponse response) throws IOException{
+	List<Map<String,Object>> list = memberService.selectAllMap();
+	HashMap<String, Object> map = new HashMap<String, Object>(); String[] header = {"ID","JOB","PW","GENDER","MAILYN","REASON","HOBBY","REGDATE"};
+	map.put("headers", header);
+	map.put("filename", "excel_member");
+	map.put("datas", list);
+	return new ModelAndView("commonExcelView", map);
+	}
+	// 등록처리
+	@RequestMapping("fileupload")
+	@ResponseBody
+	public HashMap<String, Object> fileupload(HttpServletRequest request) throws IllegalStateException, IOException {
+		String folder = request.getSession().getServletContext().getRealPath("/images");
+		System.out.println("folder -------> " + folder);
+		String path = "./images";
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
+		MultipartFile multipartFile = multipartRequest.getFile("upload");
+		String fileName = multipartFile.getOriginalFilename();
+		multipartFile.transferTo(new File(folder,fileName ));
+		
+		HashMap<String, Object> map = new HashMap<String, Object>(); 
+		map.put("uploaded", true);
+		map.put("url",  path + "/" + fileName);
+		return map;
 	}
 	
 }

@@ -3,6 +3,7 @@ package com.yedam.app.member.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.yedam.app.member.MemberVo;
 
@@ -17,5 +18,7 @@ public interface MemberService {
 	int insert(MemberVo memberVo);
 
 	List<MemberVo> selectAll();
+	
+	List<Map<String,Object>> selectAllMap();
 
 }

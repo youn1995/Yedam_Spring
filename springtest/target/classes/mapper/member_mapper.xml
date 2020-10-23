@@ -4,37 +4,43 @@
 
 <mapper namespace="com.yedam.app.member.mapper.MemberDAO">
 	<select id="selectAll" resultType="mem">
-		SELECT * FROM MEMBER ORDER BY ID
+		SELECT * FROM MEMBER ORDER BY
+		ID
+	</select>
+	<select id="selectAllMap" resultType="map">
+		SELECT * FROM MEMBER ORDER
+		BY ID
 	</select>
 	<select id="selectOne" resultType="mem" parameterType="mem">
-		SELECT * FROM MEMBER WHERE ID = #{id}
+		SELECT *
+		FROM MEMBER WHERE ID = #{id}
 	</select>
 	<insert id="insert" parameterType="mem">
 		INSERT INTO MEMBER (ID,
-							PW, 
-							JOB, 
-							GENDER, 
-							MAILYN, 
-							REASON, 
-							HOBBY, 
-							REGDATE) 
-					VALUES( #{id},
-							#{pw},
-							#{job},
-							#{gender},
-							#{mailyn},
-							#{reason},
-							#{hobby},
-							SYSDATE)
+		PW,
+		JOB,
+		GENDER,
+		MAILYN,
+		REASON,
+		HOBBY,
+		REGDATE)
+		VALUES( #{id},
+		#{pw},
+		#{job},
+		#{gender},
+		#{mailyn},
+		#{reason},
+		#{hobby},
+		SYSDATE)
 	</insert>
 	<update id="update" parameterType="mem">
-		UPDATE MEMBER SET PW = #{pw}, 
-						  JOB = #{job}, 
-						  GENDER = #{gender}, 
-						  MAILYN = #{mailyn}, 
-						  REASON = #{reason}, 
-						  HOBBY = #{hobby} 
-					  WHERE ID = #{id}
+		UPDATE MEMBER SET PW = #{pw},
+		JOB = #{job},
+		GENDER = #{gender},
+		MAILYN = #{mailyn},
+		REASON = #{reason},
+		HOBBY = #{hobby}
+		WHERE ID = #{id}
 	</update>
 	<delete id="delete" parameterType="mem">
 		DELETE MEMBER WHERE ID = #{id}
